@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo - IMPB</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Variáveis CSS para consistência */
+        :root {
+            --primary-color: #3498db; /* Azul principal */
+            --secondary-color: #2980b9; /* Azul escuro */
+            --accent-color: #e74c3c; /* Vermelho para ações de exclusão */
+            --dark-color: #2c3e50; /* Cor escura para textos e fundos */
+            --text-white: #ffffff; /* Branco para fundos e textos */
+            --background-light: #f4f6f9; /* Fundo claro */
+            --text-light: #7f8c8d; /* Cinza para textos secundários */
+            --shadow-color: rgba(0, 0, 0, 0.1); /* Sombra suave */
+            --border-radius: 8px; /* Bordas arredondadas */
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+        }
+
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: var(--background-light);
+            color: var(--dark-color);
+        }
+
+        /* Header */
+        header {
+            background-color: var(--text-white);
+            box-shadow: 0 2px 5px var(--shadow-color);
+            padding: var(--spacing-md) 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 var(--spacing-md);
+        }
+
+        header .logo h1 {
+            font-size: 1.5rem;
+            color: var(--dark-color);
+            display: flex;
+            align-items: center;
+        }
+
+        header .logo i {
+            margin-right: var(--spacing-sm);
+            color: var(--primary-color);
+        }
+
+        header nav ul {
+            list-style: none;
+            display: flex;
+            gap: var(--spacing-md);
+        }
+
+        header nav ul li a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            padding: var(--spacing-sm);
+            border-radius: var(--border-radius);
+            transition: background-color 0.3s;
+        }
+
+        header nav ul li a:hover,
+        header nav ul li a.active {
+            background-color: var(--primary-color);
+            color: var(--text-white);
+        }
+
+        header .mobile-menu {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--dark-color);
+        }
+
+        /* Painel Administrativo */
+        .admin-wrapper {
+            display: flex;
+            min-height: calc(100vh - 60px);
+        }
+
+        /* Barra Lateral */
+        .sidebar {
+            width: 250px;
+            background-color: var(--dark-color);
+            color: var(--text-white);
+            padding: var(--spacing-lg);
+            position: fixed;
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .sidebar h3 {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-lg);
+            text-align: center;
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar ul li {
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .sidebar ul li a {
+            color: var(--text-white);
+            display: block;
+            padding: var(--spacing-sm);
+            border-radius: var(--border-radius);
+            transition: background-color 0.3s;
+        }
+
+        .sidebar ul li a:hover,
+        .sidebar ul li a.active {
+            background-color: var(--primary-color);
+        }
+
+        /* Conteúdo Principal */
+        .admin-content {
+            margin-left: 250px;
+            flex-grow: 1;
+            padding: var(--spacing-xl);
+        }
+
+        .admin-section {
+            display: none;
+        }
+
+        .admin-section.active {
+            display: block;
+        }
+
+        .admin-section h2 {
+            font-size: clamp(1.75rem, 4vw, 2.25rem);
+            color: var(--dark-color);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        /* Tabelas */
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--text-white);
+            box-shadow: 0 4px 12px var(--shadow-color);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+
+        .admin-table th,
+        .admin-table td {
+            padding: var(--spacing-md);
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .admin-table th {
+            background-color: var(--primary-color);
+            color: var(--text-white);
+        }
+
+        .admin-table tr:hover {
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+
+        .admin-table .action-buttons button {
+            padding: 8px;
+            margin-right: 5px;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .admin-table .edit-btn {
+            background-color: var(--primary-color);
+            color: var(--text-white);
+        }
+
+        .admin-table .delete-btn {
+            background-color: var(--accent-color);
+            color: var(--text-white);
+        }
+
+        .admin-table .edit-btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .admin-table .delete-btn:hover {
+            background-color: #c0392b;
+        }
+
+        /* Formulários */
+        .admin-form {
+            background-color: var(--text-white);
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 12px var(--shadow-color);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .admin-form .form-group {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .admin-form label {
+            display: block;
+            margin-bottom: var(--spacing-sm);
+            font-weight: 500;
+        }
+
+        .admin-form input,
+        .admin-form select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+        }
+
+        .admin-form button {
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: var(--text-white);
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .admin-form button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: var(--text-white);
+            padding: var(--spacing-lg) 0;
+            text-align: center;
+        }
+
+        footer .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-lg);
+            padding: 0 var(--spacing-md);
+        }
+
+        footer .footer-col h3 {
+            font-size: 1.25rem;
+            margin-bottom: var(--spacing-md);
+        }
+
+        footer .footer-col p {
+            font-size: 0.9rem;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        footer .social-links {
+            display: flex;
+            gap: var(--spacing-sm);
+            justify-content: center;
+        }
+
+        footer .social-links a {
+            color: var(--text-white);
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+
+        footer .social-links a:hover {
+            color: var(--primary-color);
+        }
+
+        footer .copyright {
+            margin-top: var(--spacing-lg);
+            font-size: 0.85rem;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            header nav {
+                display: none;
+            }
+
+            header nav.active {
+                display: block;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background-color: var(--text-white);
+                box-shadow: 0 2px 5px var(--shadow-color);
+            }
+
+            header nav ul {
+                flex-direction: column;
+                padding: var(--spacing-md);
+            }
+
+            header .mobile-menu {
+                display: block;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+                padding: var(--spacing-md);
+            }
+
+            .admin-content {
+                margin-left: 0;
+                padding: var(--spacing-md);
+            }
+
+            .admin-table {
+                font-size: 0.9rem;
+            }
+
+            .admin-table th,
+            .admin-table td {
+                padding: var(--spacing-sm);
+            }
+        }
+
+        @media (max-width: 576px) {
+            header .logo h1 {
+                font-size: 1.2rem;
+            }
+
+            .admin-form input,
+            .admin-form select,
+            .admin-form button {
+                font-size: 0.9rem;
+                padding: 8px;
+            }
+
+            .admin-table {
+                display: block;
+                overflow-x: auto;
+            }
+
+            footer .container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1><i class="fas fa-graduation-cap"></i> Instituto Médio Politécnico da Graça</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="sobre.html">Sobre</a></li>
+                    <li><a href="cursos.html">Cursos</a></li>
+                    <li><a href="contato.html">Contato</a></li>
+                    <li><a href="adm.html" class="active">Área Admin</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="admin-wrapper">
+        <!-- Barra Lateral -->
+        <aside class="sidebar">
+            <h3>Painel Administrativo</h3>
+            <ul>
+                <li><a href="#alunos" class="sidebar-link active">Gerenciar Alunos</a></li>
+                <li><a href="#professores" class="sidebar-link">Gerenciar Professores</a></li>
+                <li><a href="#cursos" class="sidebar-link">Gerenciar Cursos</a></li>
+                <li><a href="#relatorios" class="sidebar-link">Relatórios</a></li>
+            </ul>
+        </aside>
+
+        <!-- Conteúdo Principal -->
+        <main class="admin-content">
+            <!-- Seção Alunos -->
+            <section id="alunos" class="admin-section active">
+                <h2>Gerenciar Alunos</h2>
+                <div class="admin-form">
+                    <h3>Adicionar/Editar Aluno</h3>
+                    <form id="aluno-form">
+                        <div class="form-group">
+                            <label for="aluno-nome">Nome</label>
+                            <input type="text" id="aluno-nome" required aria-required="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="aluno-email">Email</label>
+                            <input type="email" id="aluno-email" required aria-required="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="aluno-curso">Curso</label>
+                            <select id="aluno-curso" required aria-required="true">
+                                <option value="">Selecione um curso</option>
+                                <option value="Energias">Energias</option>
+                                <option value="Automação">Automação</option>
+                                <option value="Climatização">Climatização</option>
+                            </select>
+                        </div>
+                        <button type="submit" aria-label="Salvar aluno">Salvar</button>
+                    </form>
+                </div>
+                <table class="admin-table" id="alunos-table">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Curso</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </section>
+
+            <!-- Seção Professores -->
+            <section id="professores" class="admin-section">
+                <h2>Gerenciar Professores</h2>
+                <div class="admin-form">
+                    <h3>Adicionar/Editar Professor</h3>
+                    <form id="professor-form">
+                        <div class="form-group">
+                            <label for="professor-nome">Nome</label>
+                            <input type="text" id="professor-nome" required aria-required="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="professor-email">Email</label>
+                            <input type="email" id="professor-email" required aria-required="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="professor-disciplina">Disciplina</label>
+                            <input type="text" id="professor-disciplina" required aria-required="true">
+                        </div>
+                        <button type="submit" aria-label="Salvar professor">Salvar</button>
+                    </form>
+                </div>
+                <table class="admin-table" id="professores-table">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Disciplina</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </section>
+
+            <!-- Seção Cursos -->
+            <section id="cursos" class="admin-section">
+                <h2>Gerenciar Cursos</h2>
+                <div class="admin-form">
+                    <h3>Adicionar/Editar Curso</h3>
+                    <form id="curso-form">
+                        <div class="form-group">
+                            <label for="curso-nome">Nome do Curso</label>
+                            <input type="text" id="curso-nome" required aria-required="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="curso-descricao">Descrição</label>
+                            <input type="text" id="curso-descricao" required aria-required="true">
+                        </div>
+                        <button type="submit" aria-label="Salvar curso">Salvar</button>
+                    </form>
+                </div>
+                <table class="admin-table" id="cursos-table">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Descrição</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </section>
+
+            <!-- Seção Relatórios -->
+            <section id="relatorios" class="admin-section">
+                <h2>Relatórios</h2>
+                <div class="admin-form">
+                    <h3>Gerar Relatório</h3>
+                    <form id="relatorio-form">
+                        <div class="form-group">
+                            <label for="relatorio-tipo">Tipo de Relatório</label>
+                            <select id="relatorio-tipo" required aria-required="true">
+                                <option value="">Selecione um tipo</option>
+                                <option value="alunos">Relatório de Alunos</option>
+                                <option value="professores">Relatório de Professores</option>
+                                <option value="cursos">Relatório de Cursos</option>
+                            </select>
+                        </div>
+                        <button type="submit" aria-label="Gerar relatório">Gerar</button>
+                    </form>
+                </div>
+                <div id="relatorio-output">
+                    <p>Selecione um tipo de relatório para visualizar os dados.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-col">
+                <h3>Instituto Médio Politécnico da Graça</h3>
+                <p>Rua da Educação, 123 - Bairro da Graça</p>
+                <p>Cidade de Benguela - Estado</p>
+                <p>CEP: 12345-678</p>
+            </div>
+            <div class="footer-col">
+                <h3>Horário de Funcionamento</h3>
+                <p>Segunda a Sexta: 7h às 15h</p>
+                <p>Sábado: 8h às 12h</p>
+                <p>Domingo: Fechado</p>
+            </div>
+            <div class="footer-col">
+                <h3>Redes Sociais</h3>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+                <p>contato@impb-angola.com</p>
+                <p>(+244) 940525856</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 Instituto Médio Politécnico da Graça. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

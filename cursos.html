@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursos - IMPB</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1><i class="fas fa-graduation-cap"></i> IMPB</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="sobre.html">Sobre</a></li>
+                    <li><a href="cursos.html" class="active">Cursos</a></li>
+                    <li><a href="contato.html">Contato</a></li>
+                    <li><a href="adm.html">Área Admin</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>Nossos Cursos</h1>
+                <p>Explore nossa oferta de ensino médio e cursos técnicos integrados</p>
+            </div>
+        </section>
+
+        <section class="cursos">
+            <div class="container">
+                <div class="filtro-cursos">
+                    <button class="filtro-btn active" data-curso="todos">Todos</button>
+                    <button class="filtro-btn" data-curso="medio">Ensino Médio</button>
+                    <button class="filtro-btn" data-curso="tecnico">Técnico Integrado</button>
+                </div>
+                <div class="cursos-grid">
+                    <div class="curso-card" data-curso="medio">
+                        <div class="curso-img">
+                            <img src="images/curso-medio.jpeg" alt="Ensino Médio Regular" loading="lazy">
+                        </div>
+                        <div class="curso-info">
+                            <h3>Ensino Médio Regular</h3>
+                            <p>Formação completa com foco em disciplinas acadêmicas e preparação para o vestibular, oferecendo uma base sólida para o futuro.</p>
+                            <div class="curso-meta">
+                                <span><i class="fas fa-clock"></i> 3 anos</span>
+                                <span><i class="fas fa-users"></i> 40 alunos/turma</span>
+                            </div>
+                            <a href="#" class="btn-curso">Saiba Mais</a>
+                        </div>
+                    </div>
+                    <div class="curso-card" data-curso="tecnico">
+                        <div class="curso-img">
+                            <img src="images/eie.jpeg" alt="Energias e Instalações Eléctricas" loading="lazy">
+                        </div>
+                        <div class="curso-info">
+                            <h3>Energias e Instalações Eléctricas</h3>
+                            <p>Capacitação em sistemas elétricos, redes de distribuição e manutenção de instalações, com práticas em laboratórios modernos.</p>
+                            <div class="curso-meta">
+                                <span><i class="fas fa-clock"></i> 3 anos</span>
+                                <span><i class="fas fa-users"></i> 30 alunos/turma</span>
+                            </div>
+                            <a href="#" class="btn-curso">Saiba Mais</a>
+                        </div>
+                    </div>
+                    <div class="curso-card" data-curso="tecnico">
+                        <div class="curso-img">
+                            <img src="images/eia.jpeg" alt="Eletrónica Industrial e Automação" loading="lazy">
+                        </div>
+                        <div class="curso-info">
+                            <h3>Eletrónica Industrial e Automação</h3>
+                            <p>Formação em automação industrial, controle de processos e eletrônica, com foco em tecnologias de ponta.</p>
+                            <div class="curso-meta">
+                                <span><i class="fas fa-clock"></i> 3 anos</span>
+                                <span><i class="fas fa-users"></i> 30 alunos/turma</span>
+                            </div>
+                            <a href="#" class="btn-curso">Saiba Mais</a>
+                        </div>
+                    </div>
+                    <div class="curso-card" data-curso="tecnico">
+                        <div class="curso-img">
+                            <img src="images/fc.jpeg" alt="Frio e Climatização" loading="lazy">
+                        </div>
+                        <div class="curso-info">
+                            <h3>Frio e Climatização</h3>
+                            <p>Especialização em sistemas de refrigeração e climatização, incluindo instalação, manutenção e reparo de equipamentos.</p>
+                            <div class="curso-meta">
+                                <span><i class="fas fa-clock"></i> 3 anos</span>
+                                <span><i class="fas fa-users"></i> 30 alunos/turma</span>
+                            </div>
+                            <a href="#" class="btn-curso">Saiba Mais</a>
+                        </div>
+                    </div>
+                    <div class="curso-card" data-curso="tecnico">
+                        <div class="curso-img">
+                            <img src="images/er.jpeg" alt="Energias Renováveis" loading="lazy">
+                        </div>
+                        <div class="curso-info">
+                            <h3>Energias Renováveis</h3>
+                            <p>Formação em fontes de energia sustentável, como solar e eólica, com projetos práticos para o futuro energético.</p>
+                            <div class="curso-meta">
+                                <span><i class="fas fa-clock"></i> 3 anos</span>
+                                <span><i class="fas fa-users"></i> 30 alunos/turma</span>
+                            </div>
+                            <a href="#" class="btn-curso">Saiba Mais</a>
+                        </div>
+                    </div>
+                    <div class="curso-card" data-curso="tecnico">
+                        <div class="curso-img">
+                            <img src="images/ga.jpeg" alt="Gestão Ambiental" loading="lazy">
+                        </div>
+                        <div class="curso-info">
+                            <h3>Gestão Ambiental</h3>
+                            <p>Capacitação em práticas de sustentabilidade, gestão de resíduos e preservação ambiental, alinhada às demandas globais.</p>
+                            <div class="curso-meta">
+                                <span><i class="fas fa-clock"></i> 3 anos</span>
+                                <span><i class="fas fa-users"></i> 30 alunos/turma</span>
+                            </div>
+                            <a href="#" class="btn-curso">Saiba Mais</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="diferenciais">
+            <div class="container">
+                <h2>Por que Escolher o IMPB?</h2>
+                <div class="diferenciais-grid">
+                    <div class="diferencial-item">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        <h3>Professores Qualificados</h3>
+                        <p>Equipe de professores com formação avançada e experiência prática.</p>
+                    </div>
+                    <div class="diferencial-item">
+                        <i class="fas fa-flask"></i>
+                        <h3>Laboratórios Modernos</h3>
+                        <p>Infraestrutura de ponta para práticas técnicas e aprendizado hands-on.</p>
+                    </div>
+                    <div class="diferencial-item">
+                        <i class="fas fa-briefcase"></i>
+                        <h3>Inserção no Mercado</h3>
+                        <p>Cursos alinhados às demandas das indústrias locais e nacionais.</p>
+                    </div>
+                    <div class="diferencial-item">
+                        <i class="fas fa-globe"></i>
+                        <h3>Sustentabilidade</h3>
+                        <p>Foco em formação ética e sustentável para o futuro de Angola.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-cursos">
+            <div class="container">
+                <h2>Junte-se ao IMPB</h2>
+                <p>Inscreva-se agora e comece sua jornada para uma carreira de sucesso!</p>
+                <a href="contato.html" class="btn">Inscreva-se</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-col">
+                <h3>Instituto Médio Politécnico da Graça</h3>
+                <p>Rua da Educação, 123 - Bairro Nossa Senhora da Graça</p>
+                <p>Cidade de Benguela - Estado</p>
+                <p>CEP: 12345-678</p>
+            </div>
+            <div class="footer-col">
+                <h3>Horário de Funcionamento</h3>
+                <p>Segunda a Sexta: 7h às 15h</p>
+                <p>Sábado: 8h às 12h</p>
+                <p>Domingo: Fechado</p>
+            </div>
+            <div class="footer-col">
+                <h3>Redes Sociais</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+                <p>contato@impb-angola.com</p>
+                <p>(+244) 940525856</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 Instituto Médio Politécnico da Graça. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Filtro de cursos
+        document.querySelectorAll('.filtro-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                document.querySelectorAll('.filtro-btn').forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                const curso = button.getAttribute('data-curso');
+                document.querySelectorAll('.curso-card').forEach(card => {
+                    if (curso === 'todos' || card.getAttribute('data-curso') === curso) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
