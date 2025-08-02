@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             // Simulação de login (substituir por backend em produção)
-            if (usuario === 'admin' && senha === '123456') {
+            if (usuario === 'admin@impb-angola.com' && senha === '123456') {
                 alert('Login efetuado com sucesso! Bem-vindo à área administrativa.');
                 window.location.href = 'adm-painel.html';
             } else {
